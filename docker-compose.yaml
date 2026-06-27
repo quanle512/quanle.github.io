@@ -1,0 +1,26 @@
+services:
+  jekyll-site:
+    image: jekyll-site
+    build: .
+    volumes: [ .:/usr/src/app ]
+    ports: [ 4000:4000 ]
+    user: 1000:1000
+    environment: [ JEKYLL_ENV=docker ]
+    command: jekyll serve -H 0.0.0.0 -w --config _config.yml,_config_docker.yml --force_polling 
+
+# services:
+#   jekyll-site:
+#     image: jekyll-site
+#     volumes:
+#       - .:/srv/jekyll
+#       # This line saves your gems permanently so you don't redownload them every time
+#       - gem_cache:/usr/local/bundle
+#     ports:
+#       - "4000:4000"
+#     # This line tells it to ALWAYS install missing gems before starting the server
+#     command: bash -c "bundle install && bundle exec jekyll serve -H 0.0.0.0 -w --force_polling"
+#     environment:
+#       - JEKYLL_ENV=development
+
+# volumes:
+#   gem_cache:
